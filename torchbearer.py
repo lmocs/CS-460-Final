@@ -18,6 +18,7 @@ Submit this file as: torchbearer.py
 """
 
 import heapq
+from collections import defaultdict
 
 
 # =============================================================================
@@ -70,9 +71,9 @@ def select_sources(spawn, relics, exit_node):
     list[node]
         No duplicates. Order does not matter.
 
-    TODO
     """
-    pass
+    # Entrance S + Relics in M
+    return [spawn] + relics
 
 
 def run_dijkstra(graph, source):
@@ -89,9 +90,29 @@ def run_dijkstra(graph, source):
         Minimum cost from source to every node in graph.
         Unreachable nodes map to float('inf').
 
-    TODO
     """
-    pass
+    # Initialize data structures for storing shortest-path distances and processing nodes
+    distances = {node: float("inf") for node in graph}
+    distances[source] = 0
+    priority_queue = [(0, source)]
+
+    while priority_queue:
+        # Pop off the minimum-most node
+        curr_dist, curr_node = heapq.heappop(priority_queue)
+
+        # Skip unnecessary iterations
+        if curr_dist > distances[curr_node]:
+            continue
+
+        for neighbor, weight in graph[curr_node]:
+            new_dist = distances[curr_node] + weight
+
+            # Update the path if a lower cost is found
+            if new_dist < distances[neighbor]:
+                distances[neighbor] = new_dist
+                heapq.heappush(priority_queue, (new_dist, neighbor))
+
+    return distances
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
@@ -109,9 +130,15 @@ def precompute_distances(graph, spawn, relics, exit_node):
         Nested structure supporting dist_table[u][v] lookups
         for every source u your design requires.
 
-    TODO
     """
-    pass
+    dist_table = defaultdict(dict)  # Data structure for distance storage
+
+    # Run Dijkstra's on every source node and record their shortest-path distances
+    sources = select_sources(spawn, relics, exit_node)
+    for source in sources:
+        dist_table[source] = run_dijkstra(graph, source)
+
+    return dist_table
 
 
 # =============================================================================
