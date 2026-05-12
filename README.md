@@ -39,8 +39,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| Entrance Node S | The adventurer's path always starts at S |
-| Relic Chamber in M | The adventurer stops at each chamber and continues to the next or to the exit T |
+| Entrance Node S | The Torchbearer's path always starts at S |
+| Relic Chamber in M | The Torchbearer stops at each chamber and continues to the next or to the exit T |
 
 ### Part 2b: Distance Storage
 
@@ -132,9 +132,9 @@ Recording the correct distance for every possible path between all nodes will al
 
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Current location | `current_loc` | String | The current node the Torchbearer is at |
+| Relics already collected | `relics_remaining` | Set | Relic chambers in M that have not yet been visited |
+| Fuel cost so far | `cost_so_far` | Float | Total fuel used to reach the current state |
 
 ### Part 5b: Data Structure for Visited Relics
 
@@ -142,18 +142,18 @@ Recording the correct distance for every possible path between all nodes will al
 
 | Property | Your answer |
 |---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Data structure chosen | Set |
+| Operation: check if relic already collected | Time complexity: O(1) |
+| Operation: mark a relic as collected | Time complexity: O(1) |
+| Operation: unmark a relic (backtrack) | Time complexity: O(1) |
+| Why this structure fits | It allows for constant time operations and backtracking |
 
 ### Part 5c: Worst-Case Search Space
 
 > Two bullets.
 
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** k!
+- **Why:** Since there are k relic chambers and every possible permutation of the relics must be found, the worst case considered is k! orders.
 
 ---
 
