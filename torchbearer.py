@@ -154,9 +154,33 @@ def dijkstra_invariant_check():
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
 
-    TODO
     """
-    return "TODO"
+    return """
+## Part 3: Algorithm Correctness
+
+### Part 3a: What the Invariant Means
+
+- **For nodes already finalized (in S):**
+  When a node is finalized and added to S, its associated distances are guaranteed to be the cheapest path possible from the source
+
+- **For nodes not yet finalized (not in S):**
+  A path may have been found and recorded for the unfinalized node, but it is not necessarily the cheapest path possible
+
+### Part 3b: Why Each Phase Holds
+
+- **Initialization : why the invariant holds before iteration 1:**
+  Before the first iteration, dist[x] = 0 and the set of finalized nodes S would be empty since no paths from the starting node have been discovered. Therefore, the invariant holds.
+
+- **Maintenance : why finalizing the min-dist node is always correct:**
+  Since all edge weights are nonnegative, any other path through an unfinalized node would need to pass through an additional edge, which would only increase the total cost of the path.
+
+- **Termination : what the invariant guarantees when the algorithm ends:**
+  After the last iteration, every reachable node is in S and the invariant guarantees each node's recorded distance is the true shortest-path distance from the source.
+
+### Part 3c: Why This Matters for the Route Planner
+
+Recording the correct distance for every possible path between all nodes will allow the route planner to decide which path is the most cost efficient and what order to visit relic chambers.
+"""
 
 
 # =============================================================================

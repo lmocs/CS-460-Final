@@ -64,13 +64,7 @@
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
-
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
   When a node is finalized and added to S, its associated distances are guaranteed to be the cheapest path possible from the source
@@ -79,8 +73,6 @@
   A path may have been found and recorded for the unfinalized node, but it is not necessarily the cheapest path possible
 
 ### Part 3b: Why Each Phase Holds
-
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
   Before the first iteration, dist[x] = 0 and the set of finalized nodes S would be empty since no paths from the starting node have been discovered. Therefore, the invariant holds.
@@ -92,8 +84,6 @@
   After the last iteration, every reachable node is in S and the invariant guarantees each node's recorded distance is the true shortest-path distance from the source.
 
 ### Part 3c: Why This Matters for the Route Planner
-
-> One sentence connecting correct distances to correct routing decisions.
 
 Recording the correct distance for every possible path between all nodes will allow the route planner to decide which path is the most cost efficient and what order to visit relic chambers.
 
