@@ -13,9 +13,6 @@
 
 ## Part 1: Problem Analysis
 
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
-
 - **Why a single shortest-path run from S is not enough:**
   - A single shortest-path run from S is not enough because it does not have a way to know
     what order to visit each relic and evaluate the combined fuel cost of visiting all relics

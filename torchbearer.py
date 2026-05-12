@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Logan Moreno
+Student ID:   827350232
 
 INSTRUCTIONS
 ------------
@@ -24,6 +24,7 @@ import heapq
 # PART 1
 # =============================================================================
 
+
 def explain_problem():
     """
     Returns
@@ -32,14 +33,29 @@ def explain_problem():
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
 
-    TODO
     """
-    return "TODO"
+    return """
+## Part 1: Problem Analysis
+
+- **Why a single shortest-path run from S is not enough:**
+  - A single shortest-path run from S is not enough because it does not have a way to know
+    what order to visit each relic and evaluate the combined fuel cost of visiting all relics
+    in a specific sequence.
+
+- **What decision remains after all inter-location costs are known:**
+  - The order that relic chambers are visited in M from S to T.
+
+- **Why this requires a search over orders (one sentence):**
+  - Since different ordering of relic chambers produce different fuel costs, it is important
+    to check all possible orderings of relic chambers and to find the one with the minimum
+    fuel cost.
+"""
 
 
 # =============================================================================
 # PART 2
 # =============================================================================
+
 
 def select_sources(spawn, relics, exit_node):
     """
@@ -102,6 +118,7 @@ def precompute_distances(graph, spawn, relics, exit_node):
 # PART 3
 # =============================================================================
 
+
 def dijkstra_invariant_check():
     """
     Returns
@@ -119,6 +136,7 @@ def dijkstra_invariant_check():
 # PART 4
 # =============================================================================
 
+
 def explain_search():
     """
     Returns
@@ -135,6 +153,7 @@ def explain_search():
 # =============================================================================
 # PARTS 5 + 6
 # =============================================================================
+
 
 def find_optimal_route(dist_table, spawn, relics, exit_node):
     """
@@ -159,8 +178,15 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
     pass
 
 
-def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
-             cost_so_far, exit_node, best):
+def _explore(
+    dist_table,
+    current_loc,
+    relics_remaining,
+    relics_visited_order,
+    cost_so_far,
+    exit_node,
+    best,
+):
     """
     Recursive helper for find_optimal_route.
 
@@ -195,6 +221,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
 # PIPELINE
 # =============================================================================
 
+
 def solve(graph, spawn, relics, exit_node):
     """
     Parameters
@@ -220,60 +247,54 @@ def solve(graph, spawn, relics, exit_node):
 # Graders will run additional tests beyond these.
 # =============================================================================
 
+
 def _run_tests():
     print("Running provided tests...")
 
     # Test 1: Spec illustration. Optimal cost = 4.
     graph_1 = {
-        'S': [('B', 1), ('C', 2), ('D', 2)],
-        'B': [('D', 1), ('T', 1)],
-        'C': [('B', 1), ('T', 1)],
-        'D': [('B', 1), ('C', 1)],
-        'T': []
+        "S": [("B", 1), ("C", 2), ("D", 2)],
+        "B": [("D", 1), ("T", 1)],
+        "C": [("B", 1), ("T", 1)],
+        "D": [("B", 1), ("C", 1)],
+        "T": [],
     }
-    cost, order = solve(graph_1, 'S', ['B', 'C', 'D'], 'T')
+    cost, order = solve(graph_1, "S", ["B", "C", "D"], "T")
     assert cost == 4, f"Test 1 FAILED: expected 4, got {cost}"
     print(f"  Test 1 passed  cost={cost}  order={order}")
 
     # Test 2: Single relic. Optimal cost = 5.
-    graph_2 = {
-        'S': [('R', 3)],
-        'R': [('T', 2)],
-        'T': []
-    }
-    cost, order = solve(graph_2, 'S', ['R'], 'T')
+    graph_2 = {"S": [("R", 3)], "R": [("T", 2)], "T": []}
+    cost, order = solve(graph_2, "S", ["R"], "T")
     assert cost == 5, f"Test 2 FAILED: expected 5, got {cost}"
     print(f"  Test 2 passed  cost={cost}  order={order}")
 
     # Test 3: No valid path to exit. Must return (inf, []).
-    graph_3 = {
-        'S': [('R', 1)],
-        'R': [],
-        'T': []
-    }
-    cost, order = solve(graph_3, 'S', ['R'], 'T')
-    assert cost == float('inf'), f"Test 3 FAILED: expected inf, got {cost}"
+    graph_3 = {"S": [("R", 1)], "R": [], "T": []}
+    cost, order = solve(graph_3, "S", ["R"], "T")
+    assert cost == float("inf"), f"Test 3 FAILED: expected inf, got {cost}"
     print(f"  Test 3 passed  cost={cost}")
 
     # Test 4: Relics reachable only through intermediate rooms.
     # Optimal cost = 6.
     graph_4 = {
-        'S': [('X', 1)],
-        'X': [('R1', 2), ('R2', 5)],
-        'R1': [('Y', 1)],
-        'Y': [('R2', 1)],
-        'R2': [('T', 1)],
-        'T': []
+        "S": [("X", 1)],
+        "X": [("R1", 2), ("R2", 5)],
+        "R1": [("Y", 1)],
+        "Y": [("R2", 1)],
+        "R2": [("T", 1)],
+        "T": [],
     }
-    cost, order = solve(graph_4, 'S', ['R1', 'R2'], 'T')
+    cost, order = solve(graph_4, "S", ["R1", "R2"], "T")
     assert cost == 6, f"Test 4 FAILED: expected 6, got {cost}"
     print(f"  Test 4 passed  cost={cost}  order={order}")
 
     # Test 5: Explanation functions must return non-placeholder strings.
     for fn in [explain_problem, dijkstra_invariant_check, explain_search]:
         result = fn()
-        assert isinstance(result, str) and result != "TODO" and len(result) > 20, \
+        assert isinstance(result, str) and result != "TODO" and len(result) > 20, (
             f"Test 5 FAILED: {fn.__name__} returned placeholder or empty string"
+        )
     print("  Test 5 passed  explanation functions are non-empty")
 
     print("\nAll provided tests passed.")
