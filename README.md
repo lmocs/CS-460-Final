@@ -163,23 +163,23 @@ Recording the correct distance for every possible path between all nodes will al
 
 > Three bullets.
 
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** The route with the minimum total fuel cost and its order of relic chambers visited so far in `best`
+- **When it is used:** Before visiting the next node, check if `cost_so_far` is less than the cost of `best`
+- **What it allows the algorithm to skip:** Skips paths where `cost_so_far` is greater than or equal to the current `best` cost
 
 ### Part 6b: Lower Bound Estimation
 
 > Three bullets.
 
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** The current location of the Torchbearer, the current cost of the route, and the shortest-path distances to all unvisited relic chambers or the exit T computed in the dictionary of distances
+- **What the lower bound accounts for:** The current fuel used as well as the minimum cost path to the next unvisited relic chamber or the exit T
+- **Why it never overestimates:** It uses the computations made in the dictionary of distances, which is guaranteed to have the minimum total fuel cost possible
 
 ### Part 6c: Pruning Correctness
 
 > One to two bullets. Explain why pruning is safe.
 
-- _Your answer here._
+- Since all edge weights are nonnegative and the current cost of the path is compared to the current best cost at each recursive call, it can be assumed that a new best is not possible if the current cost is greater than or equal to the current best cost. Therefore, it is safe to prune lower bound paths.
 
 ---
 
@@ -187,4 +187,15 @@ Recording the correct distance for every possible path between all nodes will al
 
 > Bullet list. If none beyond lecture notes, write that.
 
-- _Your references here._
+- Lecture Notes and Assignments
+  - Used resources in Part 3 and 4
+  - Notes and assignments helped me determine IMT and why greedy fails
+- [Time Complexities of Python Dictionary](https://www.geeksforgeeks.org/python/time-complexities-of-python-dictionary/)
+  - Used resource in Part 2B and Implementation
+  - Article explained how dictionaries work and why they have O(1) lookup
+- [Internal working of Set in Python](https://www.geeksforgeeks.org/python/internal-working-of-set-in-python/)
+  - Used resource in Part 5B and Implementation
+  - Article explained how sets work and why they have O(1) operations
+- [Time complexity of all permutations of a string](https://www.geeksforgeeks.org/dsa/time-complexity-permutations-string/)
+  - Used resource in Part 5C
+  - Article explained how to determine the time complexity of finding the number of possible permutations of a string, applying that logic to the current problem
