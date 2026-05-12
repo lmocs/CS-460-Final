@@ -196,7 +196,6 @@ def explain_search():
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
 
-    TODO
     """
     return """
 ## Part 4: Search Design
@@ -238,8 +237,9 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
     """
+    # Calls `_explore()` and returns the path with the best cost and order
+    # Pass `relics` as a set in the corresponding argument
     pass
 
 
@@ -279,6 +279,29 @@ def _explore(
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
+    # TODO: Delete todo and required note above
+
+    # Return if there are no more relic chambers to be visited
+    if not relics_remaining:
+        return
+
+    # Iterate through each relic chamber to find the minimum-cost distance between them
+    for relic in relics_remaining:
+        # Retrieve the dict of neighbors from the current node
+        neighbors = dist_table.get(current_loc)
+
+        # Look up the precomputed cost to the next relic in the set
+        min_cost_to_relic = neighbors.get(relic)
+
+        # Mark the current relic as visited by removing it from the set and adding it to the order
+        relics_remaining.remove(relic)
+        relics_visited_order.append(relic)
+
+        # Recurse
+        # _explore()
+
+        # Backtrack
+
     pass
 
 

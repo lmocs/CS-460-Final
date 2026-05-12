@@ -109,9 +109,6 @@ Recording the correct distance for every possible path between all nodes will al
 
 ### Part 5a: State Representation
 
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
-
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
 | Current location | `current_loc` | String | The current node the Torchbearer is at |
@@ -119,8 +116,6 @@ Recording the correct distance for every possible path between all nodes will al
 | Fuel cost so far | `cost_so_far` | Float | Total fuel used to reach the current state |
 
 ### Part 5b: Data Structure for Visited Relics
-
-> Fill in the table.
 
 | Property | Your answer |
 |---|---|
@@ -132,8 +127,6 @@ Recording the correct distance for every possible path between all nodes will al
 
 ### Part 5c: Worst-Case Search Space
 
-> Two bullets.
-
 - **Worst-case number of orders considered:** k!
 - **Why:** Since there are k relic chambers and every possible permutation of the relics must be found, the worst case considered is k! orders.
 
@@ -143,15 +136,11 @@ Recording the correct distance for every possible path between all nodes will al
 
 ### Part 6a: Best-So-Far Tracking
 
-> Three bullets.
-
 - **What is tracked:** The route with the minimum total fuel cost and its order of relic chambers visited so far in `best`
 - **When it is used:** Before visiting the next node, check if `cost_so_far` is less than the cost of `best`
 - **What it allows the algorithm to skip:** Skips paths where `cost_so_far` is greater than or equal to the current `best` cost
 
 ### Part 6b: Lower Bound Estimation
-
-> Three bullets.
 
 - **What information is available at the current state:** The current location of the Torchbearer, the current cost of the route, and the shortest-path distances to all unvisited relic chambers or the exit T computed in the dictionary of distances
 - **What the lower bound accounts for:** The current fuel used as well as the minimum cost path to the next unvisited relic chamber or the exit T
@@ -159,15 +148,11 @@ Recording the correct distance for every possible path between all nodes will al
 
 ### Part 6c: Pruning Correctness
 
-> One to two bullets. Explain why pruning is safe.
-
 - Since all edge weights are nonnegative and the current cost of the path is compared to the current best cost at each recursive call, it can be assumed that a new best is not possible if the current cost is greater than or equal to the current best cost. Therefore, it is safe to prune lower bound paths.
 
 ---
 
 ## References
-
-> Bullet list. If none beyond lecture notes, write that.
 
 - Lecture Notes and Assignments
   - Used resources in Part 3 and 4
