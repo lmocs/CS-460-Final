@@ -198,7 +198,21 @@ def explain_search():
 
     TODO
     """
-    return "TODO"
+    return """
+## Part 4: Search Design
+
+### Why Greedy Fails
+
+- **The failure mode:** If greedy will always pick the nearest unvisited relic chamber first, a locally optimal choice can be more expensive later on. It fails to account for paths that can be locally inoptimal but globally optimal.
+- **Counter-example setup:** The following are the nodes in the graph: entrance S, relic chambers A and B, and exit T. Their costs is as follows: S -> A = 1, S -> B = 4, A -> B = 10, A -> T = 1, B -> A = 1, B -> T = 1.
+- **What greedy picks:** Greedy will select A first because it is the cheapest (1), then B (10), then exits at T for a total fuel cost of 12.
+- **What optimal picks:** Optimal will select B first (4), then A (1), then T for a total fuel cost of 6.
+- **Why greedy loses:** In this example, greedy takes the locally optimal choice and selects A first because a cost of 1 is less than B's cost of 4. This fails to account for a cheaper alternative by taking more fuel upfront and saving 6 fuel in the end.
+
+### What the Algorithm Must Explore
+
+- The algorithm must explore every possible order of visiting the relic chambers in M to guarantee that the minimum total fuel cost route is found.
+"""
 
 
 # =============================================================================
