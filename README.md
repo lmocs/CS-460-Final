@@ -39,8 +39,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Entrance Node S | The adventurer's path always starts at S |
+| Relic Chamber in M | The adventurer stops at each chamber and continues to the next or to the exit T |
 
 ### Part 2b: Distance Storage
 
@@ -48,20 +48,20 @@
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | Dictionary of Dictionaries |
+| What the keys represent | Source (outer dict) and Destination (inner dict) |
+| What the values represent | The cheapest cost path from source to destination |
+| Lookup time complexity | O(1) |
+| Why O(1) lookup is possible | Dictionaries have O(1) lookup for all key-value pairs using hash functions |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** One run from S and k runs from each relic chamber (1 + k runs)
+- **Cost per run:** O(m * log n), where m is the number of edges and n is the number of vertices in the graph
+- **Total complexity:** Number of Runs * Cost Per Run = O(1 + k) * O(m * log n) = O(k * m * log n)
+- **Justification (one line):** Since constants are dropped, the time complexity of runs simplifies to O(k) and each run requires one full traversal of the graph from each source k.
 
 ---
 
