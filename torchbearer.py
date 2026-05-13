@@ -303,7 +303,7 @@ def _explore(
 
         # If a new minimum-cost path is found, update `best` in place
         if total_fuel_cost < best[0]:
-            best[0], best[1] = total_fuel_cost, relics_visited_order
+            best[0], best[1] = total_fuel_cost, relics_visited_order.copy()
 
         return
 

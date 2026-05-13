@@ -21,9 +21,6 @@ Before heading straight into an implementation, I want to fully understand the p
 
 ## Entry 2 – May 11, 2026: Answering README Questions
 
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
-
 Following my plan, I went through each of the parts and answered the questions in the README. It took me a bit to understand how to find the time complexity of a single run of Dijkstra's, but after a while I found past notes stepping through a similar problem. I also struggled to understand the worst-case search space of the algorithm. I realized that the algorithm is searching through every possible permutation of nodes in the graph, and found an article online explaining permutations. Taking note of that helped me understand the algorithm's worst-case time complexity.
 
 ---
@@ -34,7 +31,13 @@ After reviewing the README, instructions, and requirements once again, I revisit
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – May 12, 2026: Pass Test Cases Partially
+
+After some trial and error, I finally got test cases to pass partially. Initially, I was getting the correct cost for each test case, but the list of relic chambers in order would be empty. I didn't realize that I was passing in a reference to `relics_visited_order`, which was being updated in the last backtracking step. To fix this, I used the list method `copy()` to assign that to `best[1]`.
+
+---
+
+## Entry 5 – [Date]: Post-Implementation Reflection
 
 > Required. Written after your implementation is complete. Describe what you would
 > change or improve given more time.
