@@ -240,7 +240,19 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
     """
     # Calls `_explore()` and returns the path with the best cost and order
     # Pass `relics` as a set in the corresponding argument
-    pass
+    best = [float("inf"), []]  # Default if there is no valid route
+
+    _explore(
+        dist_table=dist_table,
+        current_loc=spawn,
+        relics_remaining=set(relics),
+        relics_visited_order=[],
+        cost_so_far=0,
+        exit_node=exit_node,
+        best=best,
+    )
+
+    return tuple(best)
 
 
 def _explore(
@@ -281,15 +293,22 @@ def _explore(
     """
     # TODO: Delete todo and required note above
 
-    # Return if there are no more relic chambers to be visited
+    # Retrieve the dict of neighbors from the current node
+    neighbors = dist_table.get(current_loc)
+
+    # Exit at T and return if there are no more relic chambers to be visited
     if not relics_remaining:
+        min_cost_to_exit = neighbors.get(exit_node)
+        total_fuel_cost = cost_so_far + min_cost_to_exit
+
+        # If a new minimum-cost path is found, update `best` in place
+        if total_fuel_cost < best[0]:
+            best[0], best[1] = total_fuel_cost, relics_visited_order
+
         return
 
     # Iterate through each relic chamber to find the minimum-cost distance between them
     for relic in relics_remaining:
-        # Retrieve the dict of neighbors from the current node
-        neighbors = dist_table.get(current_loc)
-
         # Look up the precomputed cost to the next relic in the set
         min_cost_to_relic = neighbors.get(relic)
 
@@ -298,11 +317,19 @@ def _explore(
         relics_visited_order.append(relic)
 
         # Recurse
-        # _explore()
+        _explore(
+            dist_table=dist_table,
+            current_loc=relic,
+            relics_remaining=relics_remaining,
+            relics_visited_order=relics_visited_order,
+            cost_so_far=cost_so_far + min_cost_to_relic,
+            exit_node=exit_node,
+            best=best,
+        )
 
         # Backtrack
-
-    pass
+        relics_remaining.add(relic)
+        relics_visited_order.remove(relic)
 
 
 # =============================================================================
@@ -325,9 +352,9 @@ def solve(graph, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
     """
-    pass
+    dist_table = precompute_distances(graph, spawn, relics, exit_node)
+    return find_optimal_route(dist_table, spawn, relics, exit_node)
 
 
 # =============================================================================
