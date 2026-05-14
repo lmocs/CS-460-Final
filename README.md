@@ -4,11 +4,6 @@
 **Student ID:** 827350232
 **Course:** CS 460 – Algorithms | Spring 2026
 
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
-
 ---
 
 ## Part 1: Problem Analysis
@@ -32,16 +27,12 @@
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
 | Source Node Type | Why it is a source |
 |---|---|
 | Entrance Node S | The Torchbearer's path always starts at S |
 | Relic Chamber in M | The Torchbearer stops at each chamber and continues to the next or to the exit T |
 
 ### Part 2b: Distance Storage
-
-> Fill in the table. No prose required.
 
 | Property | Your answer |
 |---|---|
@@ -52,8 +43,6 @@
 | Why O(1) lookup is possible | Dictionaries have O(1) lookup for all key-value pairs using hash functions |
 
 ### Part 2c: Precomputation Complexity
-
-> State the total complexity and show the arithmetic. Two to three lines max.
 
 - **Number of Dijkstra runs:** One run from S and k runs from each relic chamber (1 + k runs)
 - **Cost per run:** O(m * log n), where m is the number of edges and n is the number of vertices in the graph
@@ -137,18 +126,18 @@ Recording the correct distance for every possible path between all nodes will al
 ### Part 6a: Best-So-Far Tracking
 
 - **What is tracked:** The route with the minimum total fuel cost and its order of relic chambers visited so far in `best`
-- **When it is used:** Before visiting the next node, check if `cost_so_far` is less than the cost of `best`
-- **What it allows the algorithm to skip:** Skips paths where `cost_so_far` is greater than or equal to the current `best` cost
+- **When it is used:** Before recursing, compute the lower bound and prune the path if it is greater than or equal to best[0]
+- **What it allows the algorithm to skip:** Skips paths where `lower_bound_cost` is greater than or equal to the current `best` cost
 
 ### Part 6b: Lower Bound Estimation
 
 - **What information is available at the current state:** The current location of the Torchbearer, the current cost of the route, and the shortest-path distances to all unvisited relic chambers or the exit T computed in the dictionary of distances
-- **What the lower bound accounts for:** The current fuel used as well as the minimum cost path to the next unvisited relic chamber or the exit T
+- **What the lower bound accounts for:** The current fuel used, the minimum cost path to the next unvisited relic chamber, and the minimum cost from any remaining relic to the exit T
 - **Why it never overestimates:** It uses the computations made in the dictionary of distances, which is guaranteed to have the minimum total fuel cost possible
 
 ### Part 6c: Pruning Correctness
 
-- Since all edge weights are nonnegative and the current cost of the path is compared to the current best cost at each recursive call, it can be assumed that a new best is not possible if the current cost is greater than or equal to the current best cost. Therefore, it is safe to prune lower bound paths.
+- Since all edge weights are nonnegative and the current cost of the path is compared to the current best cost at each recursive call, it can be assumed that a new best is not possible if the lower bound is greater than or equal to the current best cost. Therefore, it is safe to prune lower bound paths.
 
 ---
 
