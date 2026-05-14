@@ -3,17 +3,9 @@
 **Student Name:** Logan Moreno
 **Student ID:** 827350232
 
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
-
 ---
 
 ## Entry 1 – May 6, 2026: Initial Plan
-
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
 
 Before heading straight into an implementation, I want to fully understand the problem by reviewing the instructions and answering the questions in the README. I then want to walk through an example of a potential solution I thought of by hand. Doing this allows me to gather a better idea of how to break down and approach the overall problem. I found that working through each of the parts in order is a natural progression to the solution. I expect Part 5 and 6 to be the hardest, and I plan to test my code by writing my own test cases wherever needed.
 
@@ -37,27 +29,28 @@ After some trial and error, I finally got test cases to pass partially. Initiall
 
 ---
 
-## Entry 5 – [Date]: Post-Implementation Reflection
+## Entry 5 – May 13, 2026: Finish Pruning Logic
 
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
-
-_Your entry here._
+Proceeded to work on the pruning logic for `_explore()`. Cleaned up comments and other sections of the code.
 
 ---
 
-## Final Entry – [Date]: Time Estimate
+## Entry 6 – May 13, 2026: Post-Implementation Reflection
 
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
+After finishing my implementation to this problem, I would want to test against multiple different graphs. I tried making my own test cases, but perhaps I overlooked a few edge cases. If I had more time, I would want to ensure that my algorithm is correct and efficient for all possible inputs.
 
-| Part | Estimated Hours |
+---
+
+## Final Entry – May 13, 2026: Time Estimate
+
+| Part | Estimated Minutes |
 |---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | |
-| **Total** | |
+| Part 1: Problem Analysis | 10 |
+| Part 2: Precomputation Design | 30 |
+| Part 3: Algorithm Correctness | 40 |
+| Part 4: Search Design | 30 |
+| Part 5: State and Search Space | 40 |
+| Part 6: Pruning | 40 |
+| Part 7: Implementation | 300 |
+| README and DEVLOG writing | 30 |
+| **Total** | 520 |
