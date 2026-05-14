@@ -284,15 +284,7 @@ def _explore(
     None
         Updates best in place.
 
-    TODO
-    Implement: base case, pruning, recursive case, backtracking.
-
-    REQUIRED: Add a 1-2 sentence comment near your pruning condition
-    explaining why it is safe (cannot skip the optimal solution).
-    This comment is graded.
     """
-    # TODO: Delete todo and required note above
-
     # Retrieve the dict of neighbors from the current node
     neighbors = dist_table.get(current_loc)
 
@@ -307,10 +299,24 @@ def _explore(
 
         return
 
-    # Iterate through each relic chamber to find the minimum-cost distance between them
+    # Calculate the lower bound as specified in the README (Part 6)
+    min_cost_to_next_relic = min(neighbors.get(relic) for relic in relics_remaining)
+    min_cost_relic_to_exit = min(
+        dist_table.get(relic).get(exit_node) for relic in relics_remaining
+    )
+    lower_bound_cost = cost_so_far + min_cost_to_next_relic + min_cost_relic_to_exit
+
+    # Pruning the lower bound cost is safe since it is impossible to get a new
+    # minimum fuel cost if the remaining edge weights are greater than or equal
+    # to the current best cost. Adding additional nonnegative edges will only
+    # increase and exceed the total fuel cost.
+    if lower_bound_cost >= best[0]:
+        return
+
+    # Iterate through each relic chamber to find all possible orderings
     for relic in relics_remaining:
         # Look up the precomputed cost to the next relic in the set
-        min_cost_to_relic = neighbors.get(relic)
+        cost_to_relic = neighbors.get(relic)
 
         # Mark the current relic as visited by removing it from the set and adding it to the order
         relics_remaining.remove(relic)
@@ -322,7 +328,7 @@ def _explore(
             current_loc=relic,
             relics_remaining=relics_remaining,
             relics_visited_order=relics_visited_order,
-            cost_so_far=cost_so_far + min_cost_to_relic,
+            cost_so_far=cost_so_far + cost_to_relic,
             exit_node=exit_node,
             best=best,
         )
